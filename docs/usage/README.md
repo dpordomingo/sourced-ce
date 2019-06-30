@@ -6,3 +6,4 @@ Once you know how to install and run **source{d} Community Edition**, you will f
 - [Using Multiple Datasets](./multiple-datasets.md)
 - [Some SQL Examples to Explore Your Dataset](./examples.md)
 - [Babelfish UAST](./bblfsh.md), how to understand code structure
+- [Create your Dashboard](./create-your-dashboard.md)
