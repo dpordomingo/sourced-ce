@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+  component-1:
+    build: .
+    image: srcd/sourced-ce-test
+    command: ['/bin/sh', '-c', 'tail -f /dev/null']
+
+  component-2:
+    build: .
+    image: srcd/sourced-ce-test
+    command: ['/bin/sh', '-c', 'tail -f /dev/null']
+
+  component-3:
+    build: .
+    image: srcd/sourced-ce-test
+    command: ['/bin/sh', '-c', 'sleep 10s']
+
+

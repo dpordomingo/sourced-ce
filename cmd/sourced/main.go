@@ -5,6 +5,7 @@ import (
 
 	"github.com/src-d/sourced-ce/cmd/sourced/cmd"
 	composefile "github.com/src-d/sourced-ce/cmd/sourced/compose/file"
+	"github.com/src-d/sourced-ce/cmd/sourced/dir"
 	"github.com/src-d/sourced-ce/cmd/sourced/format"
 	"github.com/src-d/sourced-ce/cmd/sourced/release"
 )
@@ -14,6 +15,10 @@ var version = "master"
 var build = "dev"
 
 func main() {
+
+	dir.BaseDir = ".sourced-test"
+	dir.ComposeGetMethod = dir.ComposeGetLocal
+
 	composefile.SetVersion(version)
 	cmd.Init(version, build)
 
