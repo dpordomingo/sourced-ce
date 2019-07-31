@@ -377,6 +377,8 @@ func workdirsPath() (string, error) {
 	return filepath.Join(path, "workdirs"), nil
 }
 
+var orgsPrefix = "orgs:"
+
 // decodeName takes workdirs root and absolute path to workdir
 // return human-readable name. It returns an error if the path could not be built
 func decodeName(base, target string) (string, error) {
@@ -386,9 +388,10 @@ func decodeName(base, target string) (string, error) {
 	}
 
 	// workdirs for remote orgs encoded into base64
-	decoded, err := base64.StdEncoding.DecodeString(p)
-	if err == nil {
-		return string(decoded), nil
+	decoded, err := base64.URLEncoding.DecodeString(p)
+	decodedString := string(decoded)
+	if err == nil && decodedString[:len(orgsPrefix)] == orgsPrefix {
+		return decodedString[len(orgsPrefix):], nil
 	}
 
 	// for windows local path convert C\path to C:\path
@@ -398,4 +401,9 @@ func decodeName(base, target string) (string, error) {
 
 	// for *nix prepend root, User/path to /Users/path
 	return filepath.Join("/", p), nil
+}
+
+// encodeName takes a list of orgs, and returns its encoded name
+func encodeName(orgs []string) string {
+	return base64.URLEncoding.EncodeToString([]byte(orgsPrefix + strings.Join(orgs, ",")))
 }
