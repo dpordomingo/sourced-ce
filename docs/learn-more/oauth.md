@@ -85,3 +85,18 @@ _**[Disclaimer] [Bug]** Listing users is buggy and it's behavior depends on how 
     1. register as a new user, who will be created with `Admin` role, and who will be able to list users `/users/list`,
     1. start `sourced` again, with the regular `OAUTH_REGISTRATION_ROLE=Gamma` (it will stop the privileged instance of `sourced` from the previous step),
     1. login with the user that you created in the second step, and use it to manage the users at you will.
+
+
+
+## hacking the thing
+
+```shell
+export OAUTH_ENABLED_PROVIDERS=github,google
+export OAUTH_REGISTRATION_ROLE=Gamma
+export OAUTH_GOOGLE_CONSUMER_KEY=xxxxxxxxxxxxxx.apps.googleusercontent.com
+export OAUTH_GOOGLE_CONSUMER_SECRET=xxxxxxxxxxxxxx
+export OAUTH_GITHUB_CONSUMER_KEY=xxxxxxxxxxxxxx
+export OAUTH_GITHUB_CONSUMER_SECRET=xxxxxxxxxxxxxx
+
+FLASK_ENV=development FLASK_APP=superset:app flask run -p 8081 --with-threads --reload --debugger --host=0.0.0.0
+```
